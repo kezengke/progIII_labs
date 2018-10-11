@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * a class to parse fasta file.
+ * a class to parse fasta files.
  * @author 2kisa
  *
  */
@@ -23,9 +23,9 @@ class FastaSequence
 	private StringBuffer sequence = new StringBuffer();
 	
 	/**
-	 * return an ArrayList of FastaSeuquence object. each object contain a header and the corresponding sequence.
-	 * @param filepath file location
-	 * @return an ArrayList of FastaSequence obj.
+	 * return an ArrayList of FastaSeuquence objects. each object contain a header and the corresponding sequence.
+	 * @param filepath input file path
+	 * @return an ArrayList of FastaSequence objects.
 	 * @throws Exception
 	 */
 	public static List<FastaSequence> readFastaFile(String filepath) throws Exception
@@ -98,7 +98,7 @@ class FastaSequence
 		Set<String> keys = sortedMap.keySet();
 		for(String key:keys)
 		{
-			writer.write(">" + sortedMap.get(key) + "\n" + key +"\n");
+			writer.write(">" + sortedMap.get(key) + "\n" + key + "\n");
 		}
 		
 		writer.flush();
@@ -113,7 +113,7 @@ class FastaSequence
 		return header;
 	}
 
-	// returns the Dna sequence of this FastaSequence
+	// returns the DNA sequence of this FastaSequence
 	public String getSequence()
 	{
 		return sequence.toString();
