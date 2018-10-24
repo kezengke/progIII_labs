@@ -39,7 +39,7 @@ public class CheckBook extends JFrame
 	private JPanel getExpendAmountInfo()
 	{
 		JPanel eInfo = new JPanel();
-		eInfo.setLayout(new GridLayout(4,2));
+		eInfo.setLayout(new GridLayout(5,1));
 		eInfo.add(grocery);
 		eInfo.add(gas);
 		eInfo.add(shopping);
@@ -53,9 +53,10 @@ public class CheckBook extends JFrame
 	private JPanel getIncomeAmountInfo()
 	{
 		JPanel iInfo = new JPanel();
+		iInfo.setLayout(new GridLayout(2,1));
 		iInfo.add(workincome);
 		iInfo.add(otherincome);
-		iInfo.add(totalamount);
+		//iInfo.add(totalamount);
 		
 		return iInfo;
 	}
@@ -63,9 +64,11 @@ public class CheckBook extends JFrame
 	private JPanel getBottonPanel()
 	{
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,2));
+		panel.setLayout(new GridLayout(0,3));
+		panel.add(category);
 		panel.add(incomeButton);
 		panel.add(expendButton);
+		
 		
 		incomeButton.addActionListener(
 				new ActionListener()
@@ -248,12 +251,13 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(500,300);
+		setSize(400,400);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
 		getContentPane().add(getIncomeAmountInfo(), BorderLayout.CENTER);
-		getContentPane().add(category, BorderLayout.EAST);
+		getContentPane().add(totalamount, BorderLayout.EAST);
+		//getContentPane().add(category, BorderLayout.EAST);
 		setJMenuBar(getMyMenuBar());
 		updateLabel();
 		setVisible(true);
