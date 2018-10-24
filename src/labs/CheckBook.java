@@ -36,21 +36,28 @@ public class CheckBook extends JFrame
 	private JButton expendButton = new JButton("expend");
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Work income", "Other income", "Others"});
 	
-	private JPanel getAmountInfo()
+	private JPanel getExpendAmountInfo()
 	{
-		JPanel info = new JPanel();
-		info.setLayout(new GridLayout(8,1));
-		info.add(grocery);
-		info.add(gas);
-		info.add(shopping);
-		info.add(rent);
-		info.add(workincome);
-		info.add(otherincome);
-		info.add(others);
-		info.add(totalamount);
+		JPanel eInfo = new JPanel();
+		eInfo.setLayout(new GridLayout(4,2));
+		eInfo.add(grocery);
+		eInfo.add(gas);
+		eInfo.add(shopping);
+		eInfo.add(rent);
+		eInfo.add(others);
 		
-		return info;
+		return eInfo;
 				
+	}
+	
+	private JPanel getIncomeAmountInfo()
+	{
+		JPanel iInfo = new JPanel();
+		iInfo.add(workincome);
+		iInfo.add(otherincome);
+		iInfo.add(totalamount);
+		
+		return iInfo;
 	}
 	
 	private JPanel getBottonPanel()
@@ -65,8 +72,20 @@ public class CheckBook extends JFrame
 				{
 					public void actionPerformed(ActionEvent e)
 					{
-						totalAmount++;
-						updateLabel();
+						if(category.getItemAt(category.getSelectedIndex()) == "Work income")
+						{
+							totalAmount++;
+							workIncomeAmount++;
+							updateLabel();
+						}
+						
+						else if(category.getItemAt(category.getSelectedIndex()) == "Other income")
+						{
+							totalAmount++;
+							otherIncomeAmount++;
+							updateLabel();
+						}
+						
 					}
 				});
 		
@@ -75,8 +94,40 @@ public class CheckBook extends JFrame
 				{
 					public void actionPerformed(ActionEvent e)
 					{
-						totalAmount--;
-						updateLabel();
+						if(category.getItemAt(category.getSelectedIndex()) == "Grocery")
+						{
+							totalAmount--;
+							groceryAmount++;
+							updateLabel();
+						}
+						
+						else if(category.getItemAt(category.getSelectedIndex()) == "Gas")
+						{
+							totalAmount--;
+							gasAmount++;
+							updateLabel();
+						}
+						
+						else if(category.getItemAt(category.getSelectedIndex()) == "Shopping")
+						{
+							totalAmount--;
+							shoppingAmount++;
+							updateLabel();
+						}
+						
+						else if(category.getItemAt(category.getSelectedIndex()) == "Rent")
+						{
+							totalAmount--;
+							rentAmount++;
+							updateLabel();
+						}
+						
+						else if(category.getItemAt(category.getSelectedIndex()) == "Others")
+						{
+							totalAmount--;
+							othersAmount++;
+							updateLabel();
+						}
 					}
 				});
 				
@@ -94,7 +145,6 @@ public class CheckBook extends JFrame
 		otherincome.setText("Other income: " + otherIncomeAmount);
 		others.setText("Others: " + othersAmount);
 		totalamount.setText("Total amount: " + totalAmount);
-		//currentAmount.setText("Current total amount: "+ totalAmount);
 		validate();
 	}
 	private JMenuBar getMyMenuBar()
@@ -201,7 +251,8 @@ public class CheckBook extends JFrame
 		setSize(500,300);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
-		getContentPane().add(getAmountInfo(), BorderLayout.CENTER);
+		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
+		getContentPane().add(getIncomeAmountInfo(), BorderLayout.CENTER);
 		getContentPane().add(category, BorderLayout.EAST);
 		setJMenuBar(getMyMenuBar());
 		updateLabel();
