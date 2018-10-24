@@ -56,7 +56,6 @@ public class CheckBook extends JFrame
 		iInfo.setLayout(new GridLayout(2,1));
 		iInfo.add(workincome);
 		iInfo.add(otherincome);
-		//iInfo.add(totalamount);
 		
 		return iInfo;
 	}
@@ -251,7 +250,7 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(400,400);
+		setSize(500,200);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
