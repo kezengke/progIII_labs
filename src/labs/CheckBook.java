@@ -23,14 +23,14 @@ public class CheckBook extends JFrame
 	private double otherIncomeAmount = 0;
 	private double othersAmount = 0;
 	
-	private JTextField grocery = new JTextField();
-	private JTextField gas = new JTextField();
-	private JTextField shopping = new JTextField();
-	private JTextField rent = new JTextField();
-	private JTextField workincome = new JTextField();
-	private JTextField otherincome = new JTextField();
-	private JTextField others = new JTextField();
-	private JTextField totalamount = new JTextField();
+	private JLabel grocery = new JLabel();
+	private JLabel gas = new JLabel();
+	private JLabel shopping = new JLabel();
+	private JLabel rent = new JLabel();
+	private JLabel workincome = new JLabel();
+	private JLabel otherincome = new JLabel();
+	private JLabel others = new JLabel();
+	private JLabel totalamount = new JLabel();
 	
 	private JButton incomeButton = new JButton("income");
 	private JButton expendButton = new JButton("expend");
