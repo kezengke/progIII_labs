@@ -34,9 +34,9 @@ public class CheckBook extends JFrame
 	private JLabel others = new JLabel();
 	private JLabel totalamount = new JLabel();
 	
-	private JButton incomeButton = new JButton("income");
-	private JButton expendButton = new JButton("expend");
+	private JButton submitButton = new JButton("save");
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
+	private JTextField enterBox = new JTextField("Enter the amount");
 	
 	private JPanel getExpendAmountInfo()
 	{
@@ -55,7 +55,7 @@ public class CheckBook extends JFrame
 	private JPanel getIncomeAmountInfo()
 	{
 		JPanel iInfo = new JPanel();
-		iInfo.setLayout(new GridLayout(2,1));
+		iInfo.setLayout(new GridLayout(5,1));
 		iInfo.add(workincome);
 		iInfo.add(otherincome);
 		
@@ -65,73 +65,71 @@ public class CheckBook extends JFrame
 	private JPanel getBottonPanel()
 	{
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,3));
+		panel.setLayout(new GridLayout(0,4));
+		panel.add(enterBox);
 		panel.add(category);
-		panel.add(incomeButton);
-		panel.add(expendButton);
+		panel.add(submitButton);
+		//panel.add(incomeButton);
+		//panel.add(expendButton);
 		
 		
-		incomeButton.addActionListener(
+		submitButton.addActionListener(
 				new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 					{
+						String str = enterBox.getText();
+						double money = Double.parseDouble(str);
+						
 						if(category.getItemAt(category.getSelectedIndex()) == "Work income")
 						{
-							totalAmount++;
-							workIncomeAmount++;
+							totalAmount += money;
+							workIncomeAmount += money;
 							updateLabel();
 						}
 						
 						else if(category.getItemAt(category.getSelectedIndex()) == "Other income")
 						{
-							totalAmount++;
-							otherIncomeAmount++;
+							totalAmount+=money;
+							otherIncomeAmount+=money;
 							updateLabel();
 						}
 						
-					}
-				});
-		
-		expendButton.addActionListener(
-				new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-					{
-						if(category.getItemAt(category.getSelectedIndex()) == "Grocery")
+						else if(category.getItemAt(category.getSelectedIndex()) == "Grocery")
 						{
-							totalAmount--;
-							groceryAmount++;
+							totalAmount-=money;
+							groceryAmount+=money;
 							updateLabel();
 						}
 						
 						else if(category.getItemAt(category.getSelectedIndex()) == "Gas")
 						{
-							totalAmount--;
-							gasAmount++;
+							totalAmount-=money;
+							gasAmount+=money;
 							updateLabel();
 						}
 						
 						else if(category.getItemAt(category.getSelectedIndex()) == "Shopping")
 						{
-							totalAmount--;
-							shoppingAmount++;
+							totalAmount-=money;
+							shoppingAmount+=money;
 							updateLabel();
 						}
 						
 						else if(category.getItemAt(category.getSelectedIndex()) == "Rent")
 						{
-							totalAmount--;
-							rentAmount++;
+							totalAmount-=money;
+							rentAmount+=money;
 							updateLabel();
 						}
 						
 						else if(category.getItemAt(category.getSelectedIndex()) == "Others")
 						{
-							totalAmount--;
-							othersAmount++;
+							totalAmount-=money;
+							othersAmount+=money;
 							updateLabel();
 						}
+						
 					}
 				});
 				
@@ -290,7 +288,7 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(500,200);
+		setSize(350,200);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
