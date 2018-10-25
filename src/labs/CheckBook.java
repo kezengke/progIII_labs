@@ -10,12 +10,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 
 public class CheckBook extends JFrame
 {
+	// initial counters.
 	private double totalAmount = 0;
 	private double groceryAmount = 0;
 	private double gasAmount = 0;
@@ -38,6 +38,7 @@ public class CheckBook extends JFrame
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
 	private JTextField enterBox = new JTextField("Enter the amount");
 	
+	// The expend category display.
 	private JPanel getExpendAmountInfo()
 	{
 		JPanel eInfo = new JPanel();
@@ -52,6 +53,7 @@ public class CheckBook extends JFrame
 				
 	}
 	
+	// The income category display.
 	private JPanel getIncomeAmountInfo()
 	{
 		JPanel iInfo = new JPanel();
@@ -62,6 +64,7 @@ public class CheckBook extends JFrame
 		return iInfo;
 	}
 	
+	// Input box, drag down list, and save button.
 	private JPanel getBottonPanel()
 	{
 		JPanel panel = new JPanel();
@@ -69,10 +72,8 @@ public class CheckBook extends JFrame
 		panel.add(enterBox);
 		panel.add(category);
 		panel.add(submitButton);
-		//panel.add(incomeButton);
-		//panel.add(expendButton);
 		
-		
+		//ugly spaghetti code 
 		submitButton.addActionListener(
 				new ActionListener()
 				{
@@ -137,6 +138,7 @@ public class CheckBook extends JFrame
 		
 	}
 	
+	// Updating display.
 	private void updateLabel()
 	{
 		grocery.setText("Grocery: "+ groceryAmount);
@@ -149,6 +151,8 @@ public class CheckBook extends JFrame
 		totalamount.setText("Total amount: " + totalAmount);
 		validate();
 	}
+	
+	// Menu for save and load file.
 	private JMenuBar getMyMenuBar()
 	{
 		JMenuBar menuBar = new JMenuBar();
@@ -186,6 +190,7 @@ public class CheckBook extends JFrame
 		
 	}
 	
+	// For loading existed file.
 	private void loadFromFile()
 	{
 		JFileChooser openFileChooser = new JFileChooser();
@@ -194,7 +199,6 @@ public class CheckBook extends JFrame
 		{
 			try
 			{
-				
 				BufferedReader reader = new BufferedReader(new FileReader(openFileChooser.getSelectedFile()));
 				ArrayList<String> amountList = new ArrayList<String>();
 				for (String oldAmount = reader.readLine(); oldAmount != null; oldAmount = reader.readLine())
@@ -202,6 +206,7 @@ public class CheckBook extends JFrame
 					amountList.add(oldAmount);
 				}
 				
+				// might be able to solve with loop
 				double temp = Double.parseDouble(amountList.get(0));
 				groceryAmount = temp;
 				
@@ -239,6 +244,7 @@ public class CheckBook extends JFrame
 		
 	}
 	
+	// For saving current actions.
 	private void saveToFile()
 	{
 		JFileChooser jfc = new JFileChooser();
@@ -288,13 +294,12 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(350,200);
+		setSize(400,200);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
 		getContentPane().add(getIncomeAmountInfo(), BorderLayout.CENTER);
 		getContentPane().add(totalamount, BorderLayout.EAST);
-		//getContentPane().add(category, BorderLayout.EAST);
 		setJMenuBar(getMyMenuBar());
 		updateLabel();
 		setVisible(true);
