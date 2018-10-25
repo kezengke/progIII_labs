@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 
@@ -34,7 +36,7 @@ public class CheckBook extends JFrame
 	
 	private JButton incomeButton = new JButton("income");
 	private JButton expendButton = new JButton("expend");
-	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Work income", "Other income", "Others"});
+	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
 	
 	private JPanel getExpendAmountInfo()
 	{
@@ -194,10 +196,38 @@ public class CheckBook extends JFrame
 		{
 			try
 			{
+				
 				BufferedReader reader = new BufferedReader(new FileReader(openFileChooser.getSelectedFile()));
-				String oldAmount = reader.readLine();
-				double temp = Double.parseDouble(oldAmount);
+				ArrayList<String> amountList = new ArrayList<String>();
+				for (String oldAmount = reader.readLine(); oldAmount != null; oldAmount = reader.readLine())
+				{
+					amountList.add(oldAmount);
+				}
+				
+				double temp = Double.parseDouble(amountList.get(0));
+				groceryAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(1));
+				gasAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(2));
+				shoppingAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(3));
+				rentAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(4));
+				othersAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(5));
+				workIncomeAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(6));
+				otherIncomeAmount = temp;
+				
+				temp = Double.parseDouble(amountList.get(7));
 				totalAmount = temp;
+				
 				reader.close();
 				updateLabel();
 			}
@@ -233,7 +263,17 @@ public class CheckBook extends JFrame
 		try
 		{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(choosenFile));
+			writer.write(this.groceryAmount +"\n");
+			writer.write(this.gasAmount +"\n");
+			writer.write(this.shoppingAmount +"\n");
+			writer.write(this.rentAmount +"\n");
+			writer.write(this.othersAmount +"\n");
+			
+			writer.write(this.workIncomeAmount +"\n");
+			writer.write(this.otherIncomeAmount +"\n");
+			
 			writer.write(this.totalAmount +"\n");
+			
 			writer.flush();
 			writer.close();
 		}
