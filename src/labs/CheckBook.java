@@ -41,10 +41,7 @@ public class CheckBook extends JFrame
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
 	private JTextField enterBox = new JTextField("Enter the amount");
 	
-	/**
-	 * Expenses category display
-	 * @return
-	 */
+	//Expenses category display
 	private JPanel getExpendAmountInfo()
 	{
 		JPanel eInfo = new JPanel();
@@ -76,7 +73,7 @@ public class CheckBook extends JFrame
 	private JPanel getBottonPanel()
 	{
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,4));
+		panel.setLayout(new GridLayout(0,3));
 		panel.add(enterBox);
 		panel.add(category);
 		panel.add(submitButton);
@@ -302,12 +299,12 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(450,200);
+		setSize(450,300);
 		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
+		getContentPane().add(getBottonPanel(), BorderLayout.NORTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
 		getContentPane().add(getIncomeAmountInfo(), BorderLayout.CENTER);
-		getContentPane().add(totalamount, BorderLayout.EAST);
+		getContentPane().add(totalamount, BorderLayout.SOUTH);
 		setJMenuBar(getMyMenuBar());
 		updateLabel();
 		setVisible(true);
