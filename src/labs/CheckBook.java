@@ -1,6 +1,7 @@
 package labs;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,8 @@ public class CheckBook extends JFrame
 	private double otherIncomeAmount = 0;
 	private double othersAmount = 0;
 	
+	Font font1 = new Font("SansSerif", Font.BOLD, 20);
+	
 	private JLabel expenses = new JLabel("Expenses");
 	private JLabel grocery = new JLabel();
 	private JLabel gas = new JLabel();
@@ -46,6 +49,7 @@ public class CheckBook extends JFrame
 	{
 		JPanel eInfo = new JPanel();
 		eInfo.setLayout(new GridLayout(6,1));
+		expenses.setFont(new Font("SansSerif", Font.BOLD, 16));
 		eInfo.add(expenses);
 		eInfo.add(grocery);
 		eInfo.add(gas);
@@ -62,6 +66,7 @@ public class CheckBook extends JFrame
 	{
 		JPanel iInfo = new JPanel();
 		iInfo.setLayout(new GridLayout(6,1));
+		incomes.setFont(new Font("SansSerif", Font.BOLD, 16));
 		iInfo.add(incomes);
 		iInfo.add(workincome);
 		iInfo.add(otherincome);
@@ -304,6 +309,7 @@ public class CheckBook extends JFrame
 		getContentPane().add(getBottonPanel(), BorderLayout.NORTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
 		getContentPane().add(getIncomeAmountInfo(), BorderLayout.CENTER);
+		totalamount.setFont(new Font("SansSerif", Font.BOLD, 16));
 		getContentPane().add(totalamount, BorderLayout.SOUTH);
 		setJMenuBar(getMyMenuBar());
 		updateLabel();
