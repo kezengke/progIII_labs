@@ -25,24 +25,31 @@ public class CheckBook extends JFrame
 	private double otherIncomeAmount = 0;
 	private double othersAmount = 0;
 	
+	private JLabel expenses = new JLabel("Expenses");
 	private JLabel grocery = new JLabel();
 	private JLabel gas = new JLabel();
 	private JLabel shopping = new JLabel();
 	private JLabel rent = new JLabel();
+	
+	private JLabel incomes = new JLabel("Incomes");
 	private JLabel workincome = new JLabel();
 	private JLabel otherincome = new JLabel();
 	private JLabel others = new JLabel();
 	private JLabel totalamount = new JLabel();
 	
-	private JButton submitButton = new JButton("save");
+	private JButton submitButton = new JButton("Update");
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
 	private JTextField enterBox = new JTextField("Enter the amount");
 	
-	// The expend category display.
+	/**
+	 * Expenses category display
+	 * @return
+	 */
 	private JPanel getExpendAmountInfo()
 	{
 		JPanel eInfo = new JPanel();
-		eInfo.setLayout(new GridLayout(5,1));
+		eInfo.setLayout(new GridLayout(6,1));
+		eInfo.add(expenses);
 		eInfo.add(grocery);
 		eInfo.add(gas);
 		eInfo.add(shopping);
@@ -57,7 +64,8 @@ public class CheckBook extends JFrame
 	private JPanel getIncomeAmountInfo()
 	{
 		JPanel iInfo = new JPanel();
-		iInfo.setLayout(new GridLayout(5,1));
+		iInfo.setLayout(new GridLayout(6,1));
+		iInfo.add(incomes);
 		iInfo.add(workincome);
 		iInfo.add(otherincome);
 		
@@ -206,7 +214,7 @@ public class CheckBook extends JFrame
 					amountList.add(oldAmount);
 				}
 				
-				// might be able to solve with loop
+				// might be able to solve with a loop
 				double temp = Double.parseDouble(amountList.get(0));
 				groceryAmount = temp;
 				
@@ -244,7 +252,7 @@ public class CheckBook extends JFrame
 		
 	}
 	
-	// For saving current actions.
+	// Saving current records to a .txt file.
 	private void saveToFile()
 	{
 		JFileChooser jfc = new JFileChooser();
@@ -294,7 +302,7 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(400,200);
+		setSize(450,200);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.SOUTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
