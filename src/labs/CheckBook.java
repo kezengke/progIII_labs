@@ -26,20 +26,21 @@ public class CheckBook extends JFrame
 	private double otherIncomeAmount = 0;
 	private double othersAmount = 0;
 	
-	Font font1 = new Font("SansSerif", Font.BOLD, 20);
-	
+	// first column labels
 	private JLabel expenses = new JLabel("Expenses");
 	private JLabel grocery = new JLabel();
 	private JLabel gas = new JLabel();
 	private JLabel shopping = new JLabel();
 	private JLabel rent = new JLabel();
 	
+	// second column labels.
 	private JLabel incomes = new JLabel("Incomes");
 	private JLabel workincome = new JLabel();
 	private JLabel otherincome = new JLabel();
 	private JLabel others = new JLabel();
 	private JLabel totalamount = new JLabel();
 	
+	// top row items.
 	private JButton submitButton = new JButton("Update");
 	private JComboBox category = new JComboBox( new String[] { "Grocery", "Gas", "Shopping", "Rent", "Others", "Work income", "Other income"});
 	private JTextField enterBox = new JTextField("Enter the amount");
@@ -74,16 +75,17 @@ public class CheckBook extends JFrame
 		return iInfo;
 	}
 	
-	// Input box, drag down list, and save button.
+	// Input box, drag down list, and update button.
 	private JPanel getBottonPanel()
 	{
 		JPanel panel = new JPanel();
+		enterBox.setFont(new Font("SansSerif", Font.BOLD, 9));
 		panel.setLayout(new GridLayout(0,3));
 		panel.add(enterBox);
 		panel.add(category);
 		panel.add(submitButton);
 		
-		//ugly spaghetti code 
+		//ugly spaghetti code  for updating labels
 		submitButton.addActionListener(
 				new ActionListener()
 				{
@@ -148,23 +150,24 @@ public class CheckBook extends JFrame
 		
 	}
 	
-	// Updating display.
+	// Updating display after clicking "update" button.
 	private void updateLabel()
 	{
-		grocery.setText("Grocery: "+ groceryAmount);
-		gas.setText("Gas: "+ gasAmount);
-		shopping.setText("Shopping: "+ shoppingAmount);
-		rent.setText("Rent: " + rentAmount);
-		workincome.setText("Work income: " + workIncomeAmount);
-		otherincome.setText("Other income: " + otherIncomeAmount);
-		others.setText("Others: " + othersAmount);
-		totalamount.setText("Total amount: " + totalAmount);
+		grocery.setText("Grocery: $"+ groceryAmount);
+		gas.setText("Gas: $"+ gasAmount);
+		shopping.setText("Shopping: $"+ shoppingAmount);
+		rent.setText("Rent: $" + rentAmount);
+		workincome.setText("Work income: $" + workIncomeAmount);
+		otherincome.setText("Other income: $" + otherIncomeAmount);
+		others.setText("Others: $" + othersAmount);
+		totalamount.setText("Total amount: $" + totalAmount);
 		validate();
 	}
 	
 	// Menu for save and load file.
 	private JMenuBar getMyMenuBar()
 	{
+		// save button for saving current updates in menu bar.
 		JMenuBar menuBar = new JMenuBar();
 		JMenu fileMenu = new JMenu("File");
 		fileMenu.setMnemonic('F');
@@ -183,6 +186,7 @@ public class CheckBook extends JFrame
 					}
 				});
 		
+		// open button for loading existed record in menu bar.
 		JMenuItem openItem = new JMenuItem("Open");
 		fileMenu.add(openItem);
 		openItem.setMnemonic('O');
@@ -216,7 +220,7 @@ public class CheckBook extends JFrame
 					amountList.add(oldAmount);
 				}
 				
-				// might be able to solve with a loop
+				// loading each corresponding line in record to current display. (might be able to solve with a loop)
 				double temp = Double.parseDouble(amountList.get(0));
 				groceryAmount = temp;
 				
@@ -276,6 +280,7 @@ public class CheckBook extends JFrame
 		
 		try
 		{
+			// writing current record to a .txt file.
 			BufferedWriter writer = new BufferedWriter(new FileWriter(choosenFile));
 			writer.write(this.groceryAmount +"\n");
 			writer.write(this.gasAmount +"\n");
@@ -304,7 +309,7 @@ public class CheckBook extends JFrame
 	{
 		super("Check Book");
 		setLocationRelativeTo(null);
-		setSize(450,300);
+		setSize(300,300);
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(getBottonPanel(), BorderLayout.NORTH);
 		getContentPane().add(getExpendAmountInfo(), BorderLayout.WEST);
