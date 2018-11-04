@@ -14,7 +14,6 @@ public class AAquiz extends JFrame
 { 
 	private int correct = 0;
 	private int wrong = 0;
-	private String q = null;
 	/**
 	 * On the top of the frame displaying the number of correct and incorrect answers.
 	 * @return 2*1 panel.
@@ -38,7 +37,7 @@ public class AAquiz extends JFrame
 	private JTextField answerBox = new JTextField();
 	private JButton confirmButton = new JButton("Confirm");
 	String promptQuestion;
-	String correct_answer;
+	String correctAnswer;
 	private static Boolean quizStarted = false;
 	/**
 	 * In the middle of the frame displaying last question and it's answer, 
@@ -67,25 +66,25 @@ public class AAquiz extends JFrame
 						if(quizStarted == true)
 						{
 							String userAnswer = answerBox.getText().toUpperCase();
-							if(userAnswer.equals(correct_answer))
+							if(userAnswer.equals(correctAnswer))
 							{
-								stopwatch.stop();
+								countDownTimer.stop();
 								correct++;
 								updateLabel();
 								index = random1.nextInt(20);
 								promptQuestion = FULL_NAMES[index];
-								correct_answer = SHORT_NAMES[index];									
+								correctAnswer = SHORT_NAMES[index];									
 								question.setText(promptQuestion);
 								startTimer(30);
 							}
-							else if(! userAnswer.equals("") && !userAnswer.equals(correct_answer))
+							else if(! userAnswer.equals("") && !userAnswer.equals(correctAnswer))
 							{
-								stopwatch.stop();
+								countDownTimer.stop();
 								wrong++;
 								updateLabel();
 								index = random1.nextInt(20);
 								promptQuestion = FULL_NAMES[index];
-								correct_answer = SHORT_NAMES[index];									
+								correctAnswer = SHORT_NAMES[index];									
 								question.setText(promptQuestion);
 								startTimer(30);
 							}
@@ -94,6 +93,7 @@ public class AAquiz extends JFrame
 					}
 				});
 		
+		//allow hit "Enter" on keybord == click confirm Button in frame.
 		answerBox.addKeyListener(new KeyAdapter() {
 	         public void keyPressed(KeyEvent e) {
 	             if (e.getKeyCode()==KeyEvent.VK_ENTER) {
@@ -108,37 +108,37 @@ public class AAquiz extends JFrame
  
 	
 	
-	Timer stopwatch;
-    int count = 0;
+	Timer countDownTimer;
+    int second = 0;
     int delay = 1000;
     public static JLabel timeRemain = new JLabel();
     /**
-     * A timer. Input count down time "countPassed", terminate program when count down hits 0.
+     * A timer. Input count down time "countdownSeconds", terminate program when count down hits 0.
      * @param countPassed
      */
-	public void startTimer(int countPassed)
+	public void startTimer(int countdownSeconds)
 	{
         ActionListener action = new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
             {
-                if(count == 0)
+                if(second == 0)
                 {
-                	stopwatch.stop();
+                	countDownTimer.stop();
                 	cancelButton.doClick();               	
                 }
                 else
                 {
-                	timeRemain.setText(count + " seconds left");
-                    count --;
+                	timeRemain.setText(second + " seconds left");
+                    second --;
                 }
 
             }
         };
-        stopwatch = new Timer(delay, action);
-        stopwatch.setInitialDelay(0);
-        stopwatch.start();
-        count = countPassed;
+        countDownTimer = new Timer(delay, action);
+        countDownTimer.setInitialDelay(0);
+        countDownTimer.start();
+        second = countdownSeconds;
 	}
 	
 
@@ -171,7 +171,7 @@ public class AAquiz extends JFrame
 						{
 							index = random1.nextInt(20);
 							promptQuestion = FULL_NAMES[index];
-							correct_answer = SHORT_NAMES[index];									
+							correctAnswer = SHORT_NAMES[index];									
 							question.setText(promptQuestion);
 							startTimer(30);	
 							quizStarted = true;
@@ -193,9 +193,9 @@ public class AAquiz extends JFrame
 
 						if(input == JOptionPane.OK_OPTION)
 						{
-							stopwatch.stop();
+							countDownTimer.stop();
 							promptQuestion = null;
-							correct_answer = null;
+							correctAnswer = null;
 							question.setText(null);
 						    correct = 0;
 						    wrong = 0;
@@ -218,9 +218,7 @@ public class AAquiz extends JFrame
 	 */
 	private void updateLabel()
 	{
-		
-		question.setText(q);
-		lastQuestion.setText("Last question: " + promptQuestion + "(" + correct_answer + ")");
+		lastQuestion.setText("Last question: " + promptQuestion + "(" + correctAnswer + ")");
 		numCorrectAnswer.setText("Correct: " + correct);
 		numCorrectAnswer.setHorizontalAlignment(JLabel.CENTER);
 
