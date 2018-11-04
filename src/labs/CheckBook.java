@@ -150,6 +150,7 @@ public class CheckBook extends JFrame
 		
 	}
 	
+	
 	// Updating display after clicking "update" button.
 	private void updateLabel()
 	{
