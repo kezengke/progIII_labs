@@ -12,6 +12,7 @@ import javax.swing.*;
 
 public class AAquiz extends JFrame
 { 
+	
 	private int correct = 0;
 	private int wrong = 0;
 	private String q = null;
