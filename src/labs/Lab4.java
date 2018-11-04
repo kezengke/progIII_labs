@@ -89,6 +89,7 @@ class FastaSequence
 			count ++;
 			
 			uniqueCountMap.put(fs.getSequence(),count);
+		
 		}
 		
 		LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
