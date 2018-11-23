@@ -118,19 +118,19 @@ public class PrimeNumGen2 extends JFrame
 		public void run()
 		{
 			long lastUpdate = System.currentTimeMillis();
+			
+			// dividing range of work to each thread.
+			// last thread will include the extra range.
 			int numPerThread = max / numThreads;
 			for(int j=0;j<numThreads;j++)
 			{
 				int lowerIndex = j * numPerThread;
 				int higherIndex;
 				if(!(j==numThreads-1))
-				{
 					higherIndex = (j+1) * numPerThread;
-				}
+
 				else
-				{
 					higherIndex = max;
-				}
 				
 				try
 				{
@@ -161,6 +161,8 @@ public class PrimeNumGen2 extends JFrame
 				}
 				
 			}
+			
+			// for displaying final results.
 			final StringBuffer buff = new StringBuffer();
 			
 			Collections.sort(list);
@@ -189,7 +191,7 @@ public class PrimeNumGen2 extends JFrame
 			
 			
 			
-		}// end run
+		} // end run
 		
 		class Worker implements Runnable
 		{
@@ -231,15 +233,15 @@ public class PrimeNumGen2 extends JFrame
 							});
 							
 							lastUpdate = System.currentTimeMillis();	
-						}
+						} // end if currentTimeMillis statement
 						
-					}
+					} // end if isPrime statement
 					
-				}
+				} // end for loop
 				semaphore.release();
-			}
+			} // end run()
 			
-		}
+		} // end class worker
 		
 	}  // end UserInput
 }
