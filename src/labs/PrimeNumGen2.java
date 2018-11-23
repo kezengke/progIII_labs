@@ -15,8 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-//import labs.PrimeNumGen.UserInput.Worker;
-
 public class PrimeNumGen2 extends JFrame
 {
 	
@@ -25,7 +23,6 @@ public class PrimeNumGen2 extends JFrame
 	private final JButton cancelButton = new JButton("Cancel");
 	private volatile boolean cancel = false;
 	private final PrimeNumGen2 thisFrame;
-	//private static final int numThreads = Runtime.getRuntime().availableProcessors();
 	
 	public static void main(String[] args)
 	{
